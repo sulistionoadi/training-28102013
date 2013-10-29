@@ -14,15 +14,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>id.ac.bsi.adi.ta</groupId>
-            <artifactId>id.ac.bsi.adi.ta.ecommerce.domain</artifactId>
-            <version>1.0</version>
+            <groupId>training</groupId>
+            <artifactId>training-java-web-domain</artifactId>
+            <version>28.10.13</version>
         </dependency>
 
         <dependency>
-            <groupId>id.ac.bsi.adi.ta</groupId>
-            <artifactId>id.ac.bsi.adi.ta.ecommerce.config</artifactId>
-            <version>1.0</version>
+            <groupId>training</groupId>
+            <artifactId>training-java-web-config</artifactId>
+            <version>28.10.13</version>
         </dependency>
 
         <dependency>

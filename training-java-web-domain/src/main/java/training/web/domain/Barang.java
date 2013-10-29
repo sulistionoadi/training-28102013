@@ -7,6 +7,7 @@ package training.web.domain;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -23,19 +24,24 @@ import javax.persistence.TemporalType;
 public class Barang {
     
     @Id
-    private String kode;
+    private BarangPK id;
+    
+    @Column(length=50)
     private String deskripsi;
-    private BigDecimal harga;
+    
+    @Column(nullable=false, scale=2, precision=12)
+    private BigDecimal harga = new BigDecimal(100);
     
     @Temporal(TemporalType.DATE)
-    private Date tanggal;
-    
-    public String getKode() {
-        return kode;
+    @Column(nullable=false)
+    private Date tanggal = new Date();
+
+    public BarangPK getId() {
+        return id;
     }
 
-    public void setKode(String kode) {
-        this.kode = kode;
+    public void setId(BarangPK id) {
+        this.id = id;
     }
 
     public String getDeskripsi() {
@@ -66,7 +72,7 @@ public class Barang {
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         return "Barang{" 
-                + "kode=" + kode 
+                + "kode=" + id.getKode() 
                 + ", deskripsi=" + deskripsi 
                 + ", harga=" + harga 
                 + ", tanggal=" + sdf.format(tanggal) + '}';

@@ -6,6 +6,7 @@ package training.web.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import training.web.dao.BarangDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import training.web.dao.TransaksiDao;
 import training.web.domain.Barang;
 import training.web.domain.BarangPK;
+import training.web.domain.Transaksi;
 import training.web.service.BelajarService;
 import training.web.view.ViewBarang;
 
@@ -32,8 +35,8 @@ public class BelajarServiceImpl
     @Autowired
     private BarangDao barangDao;
     @Autowired
-    private SessionFactory sessionFactory;
-
+    private TransaksiDao transaksiDao;
+    
     @Override
     public void save(Barang b) {
         //RunningNumber number = runningNumberDao.getLastNumber(currnet);
@@ -69,6 +72,26 @@ public class BelajarServiceImpl
             Date start, Date end, Pageable pageable) {
         return barangDao.findByTanggalBetween(
                 start, end, pageable).getContent();
+    }
+
+    @Override
+    public void save(Transaksi t) {
+        transaksiDao.save(t);
+    }
+
+    @Override
+    public Page<Transaksi> findTransaksiByTanggal(
+            Date start, Date end, Pageable pageable) {
+        
+        Page<Transaksi> result = 
+                transaksiDao.findByTanggalBetween(
+                start, end, pageable);
+        
+        for (Transaksi tr : result.getContent()) {
+            Hibernate.initialize(tr.getDetails());
+        }
+        
+        return result;
     }
 
     

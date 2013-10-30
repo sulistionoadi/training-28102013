@@ -17,6 +17,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import training.web.domain.Barang;
 import training.web.domain.BarangPK;
+import training.web.domain.Transaksi;
+import training.web.domain.TransaksiDetail;
 
 /**
  *
@@ -61,7 +63,7 @@ public class BarangTest {
     }
     
     
-    @Test
+//    @Test
     public void testFindByTanggal(){
         PageRequest pageRequest = 
                 new PageRequest(0, 10, 
@@ -77,6 +79,38 @@ public class BarangTest {
         for (Barang barang : listBarang) {
             System.out.println(barang.toString());
         }
+    }
+    
+    @Test
+    public void testSaveTransaksi(){
+        
+        Transaksi transaksi = new Transaksi();
+        transaksi.setTanggal(new Date());
+        
+        Barang b1 = service.findBarangById(
+                new BarangPK("B-001", "KLM"));
+        Barang b2 = service.findBarangById(
+                new BarangPK("B-002", "KLM"));
+        
+        TransaksiDetail d1 = new TransaksiDetail();
+        d1.setHeader(transaksi);
+        d1.setBarang(b1);
+        d1.setQty(5);
+        d1.setHarga(b1.getHarga());
+        d1.setTotal(d1.getHarga()
+                .multiply(new BigDecimal(d1.getQty())));
+        transaksi.getDetails().add(d1);
+        
+        TransaksiDetail d2 = new TransaksiDetail();
+        d2.setHeader(transaksi);
+        d2.setBarang(b2);
+        d2.setQty(3);
+        d2.setHarga(b2.getHarga());
+        d2.setTotal(d2.getHarga()
+                .multiply(new BigDecimal(d2.getQty())));
+        transaksi.getDetails().add(d2);
+        
+        service.save(transaksi);
     }
 }
 

@@ -6,6 +6,7 @@ package training.web.service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,6 +21,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import training.web.domain.Barang;
 import training.web.domain.BarangPK;
+import training.web.view.ViewBarang;
 
 /**
  *
@@ -46,18 +48,22 @@ public class BarangTest {
     @Test
     public void hello() {
         Barang b = new Barang();
-        b.setId(new BarangPK("B-001", "KLM"));
-        b.setDeskripsi("LCD TV 32 Inch");
+        b.setId(new BarangPK("B-004", "KLM"));
+        b.setDeskripsi("LCD TV 24 Inch");
         b.setHarga(new BigDecimal("3500000"));
         b.setTanggal(new Date());
         service.save(b);
         
         PageRequest pageRequest = 
-                new PageRequest(0, 20, 
+                new PageRequest(0, 3, 
                     new Sort(Sort.Direction.ASC, "id.kode", "id.cabang"));
         
-        Page<Barang> listBarang = 
-                service.findAllBarang(pageRequest);
-        
+        List<Barang> listBarang = 
+                service.findAllBarang(pageRequest).getContent();
+        for (Barang barang : listBarang) {
+            System.out.println(barang.toString());
+        }
     }
+    
 }
+

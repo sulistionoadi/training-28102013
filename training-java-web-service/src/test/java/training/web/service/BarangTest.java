@@ -81,7 +81,7 @@ public class BarangTest {
         }
     }
     
-    @Test
+//    @Test
     public void testSaveTransaksi(){
         
         Transaksi transaksi = new Transaksi();
@@ -111,6 +111,28 @@ public class BarangTest {
         transaksi.getDetails().add(d2);
         
         service.save(transaksi);
+    }
+    
+    
+    @Test
+    public void viewTransaksi(){
+        PageRequest pageRequest = 
+                new PageRequest(0, 10);
+        
+        DateTime tgl1 = new DateTime("2013-10-29");
+        DateTime tgl2 = tgl1.plusDays(1);
+        
+        List<Transaksi> transaksiList = 
+                service.findTransaksiByTanggal(
+                tgl1.toDate(), tgl2.toDate(), 
+                pageRequest).getContent();
+        
+        for (Transaksi t : transaksiList) {
+            System.out.println(t.toString());
+            for (TransaksiDetail td : t.getDetails()) {
+                System.out.println(td.toString());
+            }
+        }
     }
 }
 

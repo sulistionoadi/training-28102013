@@ -61,5 +61,13 @@ public class Transaksi {
     public void setDetails(List<TransaksiDetail> details) {
         this.details = details;
     }
+
+    @Override
+    public String toString() {
+        return "Transaksi{" + "id=" + id 
+                + ", tanggal=" + tanggal 
+                + ", details=" + details.size() + '}';
+    }
+ 
     
 }

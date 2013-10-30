@@ -4,6 +4,7 @@
  */
 package training.web.service;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,8 @@ public interface BelajarService {
     public Barang findBarangById(BarangPK barangPK);
     public Page<Barang> findAllBarang(Pageable pageable);
     
-    public List<ViewBarang> getViewBarang();
+    public Long countBarangByTanggal(Date start, Date end);
+    public List<Barang> findBarangByTanggal(
+            Date start, Date end, Pageable pageable);
     
 }

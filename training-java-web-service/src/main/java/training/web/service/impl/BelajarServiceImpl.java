@@ -4,10 +4,12 @@
  */
 package training.web.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import training.web.dao.BarangDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -34,7 +36,11 @@ public class BelajarServiceImpl
 
     @Override
     public void save(Barang b) {
+        //RunningNumber number = runningNumberDao.getLastNumber(currnet);
+        //b.setDocumentNumber(number.getNumber());
+        //number.setNumber(number.getNumber + 1);
         barangDao.save(b);
+        //runningNumberDao.update(number);
     }
 
     @Override
@@ -53,10 +59,17 @@ public class BelajarServiceImpl
     }
 
     @Override
-    public List<ViewBarang> getViewBarang() {
-//        return sessionFactory.getCurrentSession()
-//                .createSQLQuery("select kode_cabang as kodeCabang from view_barang").list();
-        return null;
+    public Long countBarangByTanggal(Date start, Date end) {
+        return barangDao.countBarangByTanggal(start, end);
     }
+
+    // select * from barang limit 0, 100
+    @Override
+    public List<Barang> findBarangByTanggal(
+            Date start, Date end, Pageable pageable) {
+        return barangDao.findByTanggalBetween(
+                start, end, pageable).getContent();
+    }
+
     
 }

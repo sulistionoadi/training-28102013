@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form Transaksi</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <link href="../js/themes/bootstrap/easyui.css" rel="stylesheet" />
+        <link href="../js/themes/icon.css" rel="stylesheet" />
+
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/easyloader.js"></script>
+        <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../js/custom-date.js"></script>
+        <script type="text/javascript" src="../js/app/transaksi.js"></script>
+    </head>
+    <body>
+        <label for="tanggal">Tanggal</label>
+        <input type="text" name="tanggal" id="tanggal" 
+               class="easyui-datebox"
+               data-options="formatter:formatDMY,
+               parser:parserDMY"/>
+    
+    <div id="toolbarTransaksiDetail">  
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newDetail()">Add</a>  
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editDetail()">Edit</a>  
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="removeDetail()">Remove</a>  
+    </div>
+        
+    <table id="gridDetail" title="Detail List" 
+           class="easyui-datagrid" toolbar="#toolbarTransaksiDetail"></table>
+           
+           
+    <script type="text/javascript">
+        $(document).ready(createDatagridDetailTransaksi);
+    </script>
+    </body>
+</html>

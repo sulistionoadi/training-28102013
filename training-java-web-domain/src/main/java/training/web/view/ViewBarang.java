@@ -4,9 +4,6 @@
  */
 package training.web.view;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 /**
  *
  * @author adi

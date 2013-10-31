@@ -6,6 +6,11 @@ package training.web.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import training.web.dao.BarangDao;
@@ -36,6 +41,9 @@ public class BelajarServiceImpl
     private BarangDao barangDao;
     @Autowired
     private TransaksiDao transaksiDao;
+    
+    @PersistenceUnit
+    private EntityManagerFactory emf;
     
     @Override
     public void save(Barang b) {
@@ -92,6 +100,20 @@ public class BelajarServiceImpl
         }
         
         return result;
+    }
+
+    @Override
+    public List<String> testViewBarang() {
+        EntityManager em = emf.createEntityManager();
+        
+        List<String> viewBarangs = 
+                 em.createNativeQuery(
+                "select kode_cabang as kodeCabang "
+                + "from view_barang")
+//                .setResultTransformer(
+//                Transformer.aliasToBean(ViewBarang.class))
+                .getResultList();
+        return viewBarangs;
     }
 
     

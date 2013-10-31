@@ -7,6 +7,7 @@ package training.web.service;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import org.joda.time.DateTime;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -19,6 +20,7 @@ import training.web.domain.Barang;
 import training.web.domain.BarangPK;
 import training.web.domain.Transaksi;
 import training.web.domain.TransaksiDetail;
+import training.web.view.ViewBarang;
 
 /**
  *
@@ -132,6 +134,15 @@ public class BarangTest {
             for (TransaksiDetail td : t.getDetails()) {
                 System.out.println(td.toString());
             }
+        }
+    }
+    
+    @Test
+    public void testViewBarang(){
+        List<String> views = 
+                service.testViewBarang();
+        for (String vb : views) {
+            System.out.println("VIEW : " + vb);
         }
     }
 }

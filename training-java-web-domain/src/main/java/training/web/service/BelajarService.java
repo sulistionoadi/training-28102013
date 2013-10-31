@@ -31,4 +31,6 @@ public interface BelajarService {
     public void save(Transaksi t);
     public Page<Transaksi> findTransaksiByTanggal(
             Date start, Date end, Pageable pageable);
+    
+    public List<String> testViewBarang();
 }

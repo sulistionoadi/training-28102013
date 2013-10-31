@@ -120,5 +120,6 @@
         <module>training-java-web-config</module>
         <module>training-java-web-domain</module>
         <module>training-java-web-service</module>
+        <module>training-java-web-ui</module>
     </modules>
 </project>

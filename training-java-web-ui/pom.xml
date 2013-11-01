@@ -99,6 +99,18 @@
             <!-- Sesuai dengan versi iReport -->
         </dependency>
         
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.7</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>1.8.5</version>
+        </dependency>
+        
     </dependencies>
 
     <build> 

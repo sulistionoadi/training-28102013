@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import training.web.service.BelajarService;
 
 /**
@@ -36,9 +37,7 @@ public class BarangController {
     
     @ResponseBody
     @RequestMapping(value="/barang/json", method= RequestMethod.GET)
-    public Map<String, Object> getJsonBarang(Pageable pageable,
-            @RequestParam("startDate") Date startDate,
-            @RequestParam("endDate") Date endDate){
+    public Map<String, Object> getJsonBarang(Pageable pageable){
         Map<String, Object> result = 
                 new HashMap<String, Object>();
         result.put("total", service.countBarang());
@@ -46,7 +45,7 @@ public class BarangController {
         return result;
     }
     
-    @RequestMapping(value="/barang/cetak", 
+    @RequestMapping(value="/barang/print", 
             method= RequestMethod.GET)
     public ModelMap cetakDaftarBarang(){
         
@@ -56,7 +55,7 @@ public class BarangController {
         ModelMap mm = new ModelMap();
         mm.put("format", "pdf");
         mm.put("tanggalCetak", new Date());
-        mm.put("listBarang", service.findAllBarang(pr));
+        mm.put("listBarang", service.findAllBarang(pr).getContent());
         return mm;
     }
     

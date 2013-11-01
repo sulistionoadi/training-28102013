@@ -126,10 +126,13 @@ public class TransaksiController {
         for (TransaksiDetail td : list) {
             if(td.getBarang().getIdBarang().equals(id)){
                 removedObject = td;
+                break;
             }
         }
         
-        list.remove(removedObject);
+        if(removedObject!=null){
+            list.remove(removedObject);
+        }
         session.setAttribute(SESSION_KEY_DETAIL_LIST, list);
         return "SUKSES";
     }

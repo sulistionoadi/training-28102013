@@ -15,6 +15,7 @@ function createGridBarang() {
         queryParams: {
             'page.page':1,
             'page.size':10
+//            'startDate':new Date() //untuk kirim parameter ke server
         },
         columns: [[
         {
@@ -48,6 +49,7 @@ function createGridBarang() {
                         data: {
                             'page.page':pageNumber,
                             'page.size':pageSize
+                            //'startDate':new Date() //untuk kirim parameter ke server
                         },
                         dataType:'json',
                         beforeSend: function(jqXHR, settings){

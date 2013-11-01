@@ -109,5 +109,30 @@ public class TransaksiController {
         return "sukses";
     }
     
+    @RequestMapping(value="/transaksi/detail/list/{id}", 
+            method= RequestMethod.DELETE)
+    @ResponseBody
+    private String delete(
+            @PathVariable String id,
+            HttpSession session){
+        
+        List<TransaksiDetail> list = new ArrayList<TransaksiDetail>();
+        if(session.getAttribute(SESSION_KEY_DETAIL_LIST) != null) {
+            list = (List<TransaksiDetail>) 
+                    session.getAttribute(SESSION_KEY_DETAIL_LIST);
+        }
+        
+        TransaksiDetail removedObject = null;
+        for (TransaksiDetail td : list) {
+            if(td.getBarang().getIdBarang().equals(id)){
+                removedObject = td;
+            }
+        }
+        
+        list.remove(removedObject);
+        session.setAttribute(SESSION_KEY_DETAIL_LIST, list);
+        return "SUKSES";
+    }
+    
     
 }

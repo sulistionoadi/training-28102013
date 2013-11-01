@@ -138,3 +138,26 @@ function saveTransaksi(){
         dataType: 'json'
     });
 }
+
+function removeDetail(){
+    var row = $('#gridDetail').datagrid('getSelected');
+    if (row){
+        $.messager.confirm('Confirm','Are you sure you want to delete this detail?',function(r){
+            if (r){
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'detail/list/' + row.barang.idBarang,
+                    success: function(data){
+                        createDatagridDetailTransaksi();
+                    },
+                    error: function(errorResp){
+                        $.messager.show({
+                            title: 'Delete Error',
+                            msg: errorResp.responseText
+                        });
+                    }
+                });
+            }
+        });
+    }
+}

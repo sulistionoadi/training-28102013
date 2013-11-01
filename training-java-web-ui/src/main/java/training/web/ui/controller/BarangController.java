@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -43,6 +44,20 @@ public class BarangController {
         result.put("total", service.countBarang());
         result.put("rows", service.findAllBarang(pageable).getContent());
         return result;
+    }
+    
+    @RequestMapping(value="/barang/cetak", 
+            method= RequestMethod.GET)
+    public ModelMap cetakDaftarBarang(){
+        
+        Long countBarang = service.countBarang();
+        PageRequest pr = new PageRequest(0, countBarang.intValue());
+        
+        ModelMap mm = new ModelMap();
+        mm.put("format", "pdf");
+        mm.put("tanggalCetak", new Date());
+        mm.put("listBarang", service.findAllBarang(pr));
+        return mm;
     }
     
 }

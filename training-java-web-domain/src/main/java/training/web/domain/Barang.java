@@ -35,6 +35,14 @@ public class Barang {
     @Temporal(TemporalType.DATE)
     @Column(nullable=false)
     private Date tanggal = new Date();
+    
+    public String getIdBarang(){
+        if(id!=null){
+            return id.getKode() + '-' + id.getCabang();
+        } else {
+            return null;
+        }
+    }
 
     public BarangPK getId() {
         return id;

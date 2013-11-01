@@ -116,5 +116,10 @@ public class BelajarServiceImpl
         return viewBarangs;
     }
 
+    @Override
+    public Long countBarang() {
+        return barangDao.count();
+    }
+
     
 }

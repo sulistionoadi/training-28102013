@@ -94,13 +94,17 @@ public class TransaksiDetail {
 
     @Override
     public String toString() {
-        return "TransaksiDetail{" + "id=" + id 
-                + ", header=" + header.getId() 
-                + ", barang=" + barang.getId().getKode() 
-                + ", barang=" + barang.getId().getCabang()
-                + ", qty=" + qty 
-                + ", harga=" + harga 
-                + ", total=" + total + '}';
+        if(header!=null && barang!=null){
+            return "TransaksiDetail{" + "id=" + id 
+                    + ", header=" + header.getId() 
+                    + ", barang=" + barang.getId().getKode() 
+                    + ", barang=" + barang.getId().getCabang()
+                    + ", qty=" + qty 
+                    + ", harga=" + harga 
+                    + ", total=" + total + '}';
+        } else {
+            return "";
+        }
     }
     
     

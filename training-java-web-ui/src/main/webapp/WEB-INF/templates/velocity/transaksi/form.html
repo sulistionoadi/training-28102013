@@ -5,8 +5,9 @@
         <title>Form Transaksi</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
-        <link href="../js/themes/bootstrap/easyui.css" rel="stylesheet" />
+        <link href="../js/themes/default/easyui.css" rel="stylesheet" />
         <link href="../js/themes/icon.css" rel="stylesheet" />
+        <link href="../css/custom.css" rel="stylesheet" />
 
         <script type="text/javascript" src="../js/jquery.min.js"></script>
         <script type="text/javascript" src="../js/easyloader.js"></script>
@@ -19,17 +20,51 @@
         <input type="text" name="tanggal" id="tanggal" 
                class="easyui-datebox"
                data-options="formatter:formatDMY,
-               parser:parserDMY"/>
-    
+               parser:parserDMY, onSelect:getTanggal"/>
+    <br>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="saveTransaksi()">Simpan Transaksi</a>
+    <br>
     <div id="toolbarTransaksiDetail">  
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newDetail()">Add</a>  
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editDetail()">Edit</a>  
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="removeDetail()">Remove</a>  
     </div>
-        
     <table id="gridDetail" title="Detail List" 
+           style="width:700px;height:250px"
            class="easyui-datagrid" toolbar="#toolbarTransaksiDetail"></table>
            
+    <div id="dlgFormTransaksiDetail" class="easyui-dialog" 
+         style="width:400px;height:200px;padding:10px 20px" 
+         closed="true" buttons="#dlg-transaksi-detail-buttons">  
+        <div class="ftitle">Detail</div>  
+        <form id="formTransaksiDetail" method="post" novalidate>  
+            <div class="fitem">
+                <label>Barang : </label>  
+                <input id="barang" name="barang" class="easyui-combobox" 
+                       data-options="method: 'get', valueField:'idBarang',
+                       textField:'deskripsi',url:'barang/list',onSelect:findBarang">  
+            </div>  
+            <div class="fitem">  
+                <label>Qty</label>  
+                <input id="qty" name="description" class="easyui-numberbox">  
+            </div>
+            <div class="fitem">  
+                <label>Harga</label>  
+                <input id="harga" name="description" class="easyui-numberbox" disabled>
+            </div>
+            <div class="fitem">  
+                <label>Total</label>  
+                <input id="total" name="description" class="easyui-numberbox" disabled>
+            </div>
+        </form>  
+    </div>  
+    <div id="dlg-transaksi-detail-buttons">  
+        <a href="javascript:void(0)" class="easyui-linkbutton" 
+           iconCls="icon-ok" onclick="saveDetail()">Save</a>  
+        <a href="javascript:void(0)" class="easyui-linkbutton" 
+           iconCls="icon-cancel" 
+           onclick="javascript:$('#dlgFormTransaksiDetail').dialog('close')">Cancel</a>  
+    </div>
            
     <script type="text/javascript">
         $(document).ready(createDatagridDetailTransaksi);

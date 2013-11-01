@@ -23,7 +23,7 @@ public interface BelajarService {
     public void delete(Barang b);
     public Barang findBarangById(BarangPK barangPK);
     public Page<Barang> findAllBarang(Pageable pageable);
-    
+    public Long countBarang();
     public Long countBarangByTanggal(Date start, Date end);
     public List<Barang> findBarangByTanggal(
             Date start, Date end, Pageable pageable);
